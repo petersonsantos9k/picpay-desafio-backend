@@ -66,8 +66,13 @@ public class UserService {
     }
 
     private User getUserById(UUID id){
+
+        if(id == null){
+            throw new UserException("ID cannot be null");
+        }
+
         return userRepository.findById(id)
-            .orElseThrow(() -> new UserException("User not found with id: " + id));
+            .orElseThrow(() -> new UserException("User not found with id"));
     }
 
 }

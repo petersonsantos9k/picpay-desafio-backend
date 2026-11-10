@@ -5,7 +5,6 @@ import com.petersonsantos9k.picpay_desafio.dto.request.UserCreateRequestDTO;
 import com.petersonsantos9k.picpay_desafio.dto.response.UserResponseDTO;
 import org.mapstruct.Mapper;
 
-
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
