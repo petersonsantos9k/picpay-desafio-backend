@@ -10,6 +10,7 @@ import com.petersonsantos9k.picpay_desafio.repository.UserRepository;
 import com.petersonsantos9k.picpay_desafio.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -22,6 +23,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public UserResponseDTO findById(UUID id){
         User obj = getUserById(id);
@@ -37,6 +39,10 @@ public class UserService {
 
         User obj = userMapper.toEntity(dto);
         obj.setUserType(userType);
+
+        String encodedPassword = passwordEncoder.encode(obj.getPassword());
+        obj.setPassword(encodedPassword);
+
 
         obj = userRepository.save(obj);
         log.info("User created successfully. User ID: {}", obj.getId());

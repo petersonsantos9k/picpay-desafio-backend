@@ -1,5 +1,6 @@
 package com.petersonsantos9k.picpay_desafio.service;
 
+import com.petersonsantos9k.picpay_desafio.config.SecurityConfig;
 import com.petersonsantos9k.picpay_desafio.domain.User;
 import com.petersonsantos9k.picpay_desafio.domain.UserType;
 import com.petersonsantos9k.picpay_desafio.repository.UserRepository;
@@ -11,6 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -20,7 +24,8 @@ import static org.assertj.core.api.Assertions.*;
 @DataJpaTest
 @Import({
     UserService.class,
-    UserMapperImpl.class
+    UserMapperImpl.class,
+    SecurityConfig.class
 })
 @DisplayName("UserServiceTest")
 class UserServiceTest {
@@ -42,6 +47,7 @@ class UserServiceTest {
                 "password",
                 UserType.COMMON);
             User objSave = userRepository.save(user);
+
             var resultMethodFindById = userService.findById(objSave.getId());
             assertThat(resultMethodFindById)
                 .usingRecursiveComparison()
