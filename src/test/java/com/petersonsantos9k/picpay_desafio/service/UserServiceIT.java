@@ -7,6 +7,7 @@ import com.petersonsantos9k.picpay_desafio.dto.request.UserCreateRequestDTO;
 import com.petersonsantos9k.picpay_desafio.dto.request.UserDepositRequestDTO;
 import com.petersonsantos9k.picpay_desafio.exception.UserException;
 import com.petersonsantos9k.picpay_desafio.repository.UserRepository;
+import com.petersonsantos9k.picpay_desafio.service.mapper.UserMapper;
 import com.petersonsantos9k.picpay_desafio.service.mapper.UserMapperImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

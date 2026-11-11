@@ -4,6 +4,7 @@ import com.petersonsantos9k.picpay_desafio.client.Payment;
 import com.petersonsantos9k.picpay_desafio.dto.client.TransactionAuthorizationResponse;
 import com.petersonsantos9k.picpay_desafio.exception.ClientException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -33,8 +34,9 @@ public class PaymentClient implements Payment {
                 return Optional.ofNullable(
                     restClient.get()
                         .uri(properties.getAuthorizeTransactionPath())
-                        .retrieve()
-                        .body(TransactionAuthorizationResponse.class)
+                        .exchange((request, response)->
+                            response.bodyTo(TransactionAuthorizationResponse.class)
+                        )
                 );
             } catch (RestClientException e) {
                 lastException = e;
