@@ -5,6 +5,7 @@ import com.petersonsantos9k.picpay_desafio.dto.request.UserDepositRequestDTO;
 import com.petersonsantos9k.picpay_desafio.dto.response.UserResponseDTO;
 import com.petersonsantos9k.picpay_desafio.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UserResponseDTO> findById(@PathVariable UUID id){
+    public ResponseEntity<UserResponseDTO> findById(@PathVariable @NotNull UUID id){
         return ResponseEntity.ok().body(
             userService.findById(id)
         );

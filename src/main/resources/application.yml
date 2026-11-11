@@ -2,7 +2,7 @@ spring:
   application:
     name: picpay-desafio
   profiles:
-    active: test
+    active: dev
 
 integration:
   payment:
